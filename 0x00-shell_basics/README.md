@@ -1,3 +1,4 @@
+# Shell Basics In a Nutshull 
 ## 0-current_working_directory :
 
 a script that prints the absolute path name of the current working directory.
@@ -8,7 +9,7 @@ Display the contents list of your current directory.
 
 ## 2-bring_me_home :
 
-Write a script that changes the working directory to the user’s home directory.
+a script that changes the working directory to the user’s home directory.
 
 ## 3-listfiles :
 
@@ -24,13 +25,13 @@ Display current directory contents.
 
 
 
-   Long format
+    Long format
 
 
-   with user and group IDs displayed numerically
+    with user and group IDs displayed numerically
 
 
-   And hidden files (starting with .)
+    And hidden files (starting with .)
 
 
 ## 6-firstdirectory :
@@ -50,5 +51,9 @@ Delete the file betty.
 ## 9-firstdirdeletion : 
 
 Delete the directory my_first_directory that is in the /tmp directory.
+
+## 10-back :
+
+Write a script that changes the working directory to the previous one.
 
 

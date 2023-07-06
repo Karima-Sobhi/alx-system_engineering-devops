@@ -1,1 +1,6 @@
-## Everything about Shell Basics in a nutshull .
+# Everything about Shell in a nutshull .
+
+## Shell Basics
+
+## Shell Permissions
+

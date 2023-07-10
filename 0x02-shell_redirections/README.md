@@ -80,6 +80,10 @@ Requirements:
 	One file per line
 	Sorted from the newest to the oldest
 
+'ls -t1' : This command lists the contents of the current directory (ls) in a sorted manner by modification time (-t) in descending order, 
+with one file per line (-1).
+
+
 ## 13-unique :
 
 a script that takes a list of words as input and prints only words that appear exactly once.
@@ -87,6 +91,9 @@ a script that takes a list of words as input and prints only words that appear e
 	Input format: One line, one word
 	Output format: One line, one word
 	Words should be sorted
+
+'uniq -u' : The uniq command is used to filter adjacent duplicate lines from its input.
+The -u option is used to display only the unique lines, i.e., it removes any duplicate lines from the sorted input.
 
 ##  14-findthatword :
 

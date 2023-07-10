@@ -103,9 +103,19 @@ Display lines containing the pattern “root” from the file /etc/passwd
 
 Display the number of lines that contain the pattern “bin” in the file /etc/passwd
 
+solution :
+	grep -i "bin" /etc/passwd |wc -l
+
+or can use that code ,it do the same 
+
+	grep -c -i "bin" /etc/passwd
+
 ##  16-whatsnext :
 
 Display lines containing the pattern “root” and 3 lines after them in the file /etc/passwd.
+
+' -A 3  '  option: Specifies that we want to display three lines after each match. 
+The -A (after) option is used to specify the number of lines to include after each matching line.
 
 ##  17-hidethisword :
 
@@ -116,6 +126,20 @@ Display all the lines in the file /etc/passwd that do not contain the pattern �
 Display all lines of the file /etc/ssh/sshd_config starting with a letter.
 
 	include capital letters as well
+
+Solution Explanation:
+
+grep: The command used for searching patterns in files.
+
+"^[[:alpha:]]": The regular expression pattern we want to match.
+
+^ indicates the start of a line.
+
+[[:alpha:]] represents any alphabetic character, including both lowercase and uppercase letters.
+
+/etc/ssh/sshd_config: The file in which we want to search for the pattern.
+
+When you run this command, it will search for lines in the /etc/ssh/sshd_config file that start with a letter (including both lowercase and uppercase letters) and display those lines.
 
 ##  19-AZ :
 

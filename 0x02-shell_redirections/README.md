@@ -159,4 +159,141 @@ Write a script that displays all users and their home directories, sorted by use
 
 	Based on the the /etc/passwd file
 
+## 100-empty_casks :
+
+Write a command that finds all empty files and directories in the current directory and all sub-directories.
+
+	Only the names of the files and directories should be displayed (not the entire path)
+		
+	Hidden files should be listed
+	
+	One file name per line
+		
+	The listing should end with a new line
+	
+	You are not allowed to use basename, grep, egrep, fgrep or rgrep
+solution :
+
+the command `find . -empty | rev | cut -d '/' -f 1 | rev` 
+
+	- `find . -empty`: This command finds empty files and directories starting from the current directory (`.`).
+	
+	 The `-empty` option matches empty files or directories. 
+		
+		{didn't use -not -name '.' as we need to search in the current directory itself also not only the directories on it }
+
+	- `rev`: This command reverses each line of input. It is used here to reverse the output of `find` so that the file or directory name appears at the beginning of the line.
+
+	- `cut -d '/' -f 1`: This command cuts each line at the delimiter `/` and selects the first field. By using `/` as the delimiter, it effectively removes the path and retains only the file or directory name.
+
+	- `rev`: Finally, the `rev` command is used again to reverse the lines back to their original order.
+
+The result is that the command will find empty files and directories, extract only their names (without the path), and display them on separate lines.
+
+Please note that while this command accomplishes the same task, it is more convoluted compared to the previous command that utilizes the `-printf` option of `find`.
+
+##  101-gifs :
+
+Write a script that lists all the files with a .gif extension in the current directory and all its sub-directories.
+
+	Hidden files should be listed
+
+	Only regular files (not directories) should be listed
+
+	The names of the files should be displayed without their extensions
+
+	The files should be sorted by byte values, but case-insensitive (file aaa should be listed before file bbb, file .b should be listed before file a, and file Rona should be listed after file jay)
+	
+	One file name per line
+
+	The listing should end with a new line
+
+	You are not allowed to use basename, grep, egrep, fgrep or rgrep
+
+solution :
+
+	Certainly! Here's an explanation of the provided command:
+
+
+	- `find -type f -name "*.gif"`: This command utilizes the `find` utility to search for regular files (`-type f`) with the extension `.gif` in the current directory and its subdirectories.
+
+
+	- `rev`: The output of the previous command is piped (`|`) to the `rev` command. This reverses the order of characters in each line.
+
+
+	- `cut -d "/" -f 1`: The output of `rev` is piped to the `cut` command, which uses the `/` character as the delimiter (`-d "/"`) and extracts the first field (`-f 1`), effectively removing the directory path and leaving only the file names.
+
+
+	- `cut -d "." -f 2-`: The output of the previous `cut` command is then piped to another `cut` command. This time, the `.` character is used as the delimiter (`-d "."`). By specifying `-f 2-`, it extracts all fields starting from the second field, effectively removing the extension from the file names.
+
+
+	- `rev`: The output of the second `cut` command is piped to `rev` again, reversing the order of characters back to their original form.
+
+
+	- `LC_ALL=C sort -f`: this command is used to sort the output of the previous pipeline (`rev | cut -d "." -f 2- | rev`) in a case-insensitive manner using byte values.
+
+Explanation:
+
+- `sort -f`: This command sorts the input in lexicographical order, with case-insensitive comparisons. The `-f` option tells `sort` to perform a case-insensitive sort.
+
+- `LC_ALL=C`: This is an environment variable setting that modifies the locale for the `sort` command. By setting `LC_ALL=C`, it ensures that the sorting is done using the C locale, which uses byte values for sorting characters. This guarantees a consistent sorting order, regardless of the system's default locale settings.
+
+Combining `LC_ALL=C` with `sort -f` ensures that the sorting is case-insensitive and based on byte values. This is particularly useful when dealing with filenames that might contain characters with different case sensitivities or accented characters.
+
+##  102-acrostic :
+
+An acrostic is a poem (or other form of writing) in which the first letter (or syllable, or word) of each line (or paragraph,
+ or other recurring feature in the text) spells out a word, message or the alphabet.
+ The word comes from the French acrostiche from post-classical Latin acrostichis). 
+As a form of constrained writing, an acrostic can be used as a mnemonic device to aid memory retrieval.
+
+###  Create a script that decodes acrostics that use the first letter of each line.
+
+	The ‘decoded’ message has to end with a new line
+
+	You are not allowed to use grep, egrep, fgrep or rgrep
+
+Solution Explaination :
+
+The command `cut -c 1 | paste -s -d ''` performs some operations on the input it receives. Let's break it down step by step:
+
+- `cut -c 1`: This command uses the `cut` utility to extract the first character (`-c 1`) from each line of input. It selects only the first character of each line.
+
+- `paste -s -d ''`: This command is used to concatenate the output of `cut` into a single line, with no delimiter between characters. Here's what each option does:
+
+When you combine these two commands using the pipe (`|`) symbol, the output of `cut -c 1` becomes the input for `paste -s -d ''`. The `cut` command extracts the first character from each line, and then `paste` concatenates those characters into a single line with no delimiter.
+
+
+In summary, the `cut -c 1 | paste -s -d ''` command takes input, extracts the first character from each line, and concatenates them into a single line without any delimiter.
+
+##  103-the_biggest_fan :
+
+Write a script that parses web servers logs in TSV format as input and displays the 11 hosts or IP addresses which did the most requests.
+
+	Order by number of requests, most active host or IP at the top
+
+	You are not allowed to use grep, egrep, fgrep or rgrep
+
+Solution Explaination :
+
+- `tail -n +2`: This command skips the first line of input and outputs the rest. The `-n +2` option tells `tail` to start from the second line.
+
+- `cut -f -1`: This command extracts the first field from each line using the delimiter specified by the `-d` option. In this case, the delimiter is the tab character by default.
+
+- `sort -k 1`: This command sorts the input based on the first field.
+
+- `uniq -c`: This command counts the number of occurrences of each unique line and displays it along with the line.
+
+- `sort -rnk 1`: This command performs a reverse numeric sort based on the first field in descending order. The `-r` option indicates a reverse sort, and the `-n` option ensures the sorting is numeric.
+
+- `head -n 11`: This command outputs the first 11 lines of the input.
+
+- `rev`: This command reverses the order of characters in each line.
+
+- `cut -d ' ' -f -1`: This command extracts the first field from each line using a space (' ') as the delimiter.
+
+- `rev`: This command reverses the order of characters back to their original form.
+
+
+
 

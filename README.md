@@ -4,6 +4,6 @@
 
 ## Shell Permissions
 
-## Shell, I/O Redirection
+## Shell, I/O Redirection and filters
 
 

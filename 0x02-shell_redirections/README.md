@@ -48,4 +48,48 @@ a script that duplicates the last line of the file iacta
 
 	The file iacta will be in the working directory .
 
+## 10-no_more_js :
+
+a script that deletes all the regular files (not the directories) with a .js extension that are present in the current directory and all its subfolders.
+
+##  11-directories :
+
+a script that counts the number of directories and sub-directories in the current directory.
+
+	The current and parent directories should not be taken into account
+	Hidden directories should be counted
+solution :
+
+1. `find . -type d`: This command uses the `find` utility to search for directories (`-type d`) starting from the current directory (`.`). The dot (`.`) represents the current directory. This command will list all directories recursively.
+
+2. `-not -name '.'`: This part of the command is used to exclude the current directory (`.`) from the results. The `-not` option negates the following expression, and `-name '.'` specifies that the name should not be a dot (`.`).
+
+3. `|`: This is called a pipe symbol. It is used to redirect the output of the previous command as input to the next command.
+
+4. `wc -l`: This command stands for "word count" and is used to count the number of lines in the input. The `-l` option tells `wc` to count lines.
+
+So, when you put it all together, the command `find . -type d -not -name '.' | wc -l` searches for directories starting from the current directory, excludes the current directory itself, and then counts the number of directories found (excluding the current directory).
+
+
+##  12-newest_files :
+
+a script that displays the 10 newest files in the current directory.
+
+Requirements:
+
+	One file per line
+	Sorted from the newest to the oldest
+
+## 13-unique :
+
+a script that takes a list of words as input and prints only words that appear exactly once.
+
+	Input format: One line, one word
+	Output format: One line, one word
+	Words should be sorted
+
+##  14-findthatword :
+
+Display lines containing the pattern “root” from the file /etc/passwd
+
 

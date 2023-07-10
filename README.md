@@ -4,3 +4,6 @@
 
 ## Shell Permissions
 
+## Shell, I/O Redirection
+
+
